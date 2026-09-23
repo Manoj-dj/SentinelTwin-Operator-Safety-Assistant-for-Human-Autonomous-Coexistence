@@ -2,7 +2,22 @@
 
 **Operator Safety Assistant for Human-Autonomous Coexistence** — a decision-support Digital Twin that gives human operators visibility into autonomous haul truck state, so they know *what's changing nearby* before they act.
 
-> Built for a Caterpillar hackathon. Backend only (FastAPI + SQLAlchemy + SQLite). No frontend code is included.
+> Built for a Caterpillar hackathon. Backend: FastAPI + SQLAlchemy + SQLite. Frontend: React + TypeScript, in `frontend/` — see [`frontend/README.md`](frontend/README.md) for its setup.
+
+---
+
+## Frontend quick start
+
+A full React/TypeScript operator dashboard lives in [`frontend/`](frontend/) and talks to this backend's real API — no mock data. With the backend running (`uvicorn app.main:app --reload`, see Setup below):
+
+```bash
+cd frontend
+npm install
+cp .env.example .env
+npm run dev
+```
+
+Then open `http://localhost:5173`. Full details (routes, WebSocket behavior, demo scenarios, troubleshooting) are in [`frontend/README.md`](frontend/README.md).
 
 ---
 

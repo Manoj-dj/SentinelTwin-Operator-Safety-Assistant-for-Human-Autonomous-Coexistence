@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand */
+  --color-brand-yellow: #ffc20e;
+  --color-brand-yellow-dark: #e6ac00;
+  --color-charcoal: #202020;
+  --color-charcoal-light: #2d2d2d;
+
+  /* Surfaces */
+  --color-surface: #f4f5f7;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #e9eaed;
+
+  /* Text */
+  --color-ink: #1a1c20;
+  --color-ink-muted: #5b616e;
+  --color-ink-faint: #8a8f99;
+
+  /* Status */
+  --color-safe: #157f3c;
+  --color-safe-bg: #e5f6ec;
+  --color-warning: #a15c00;
+  --color-warning-bg: #fff2d9;
+  --color-critical: #b3261e;
+  --color-critical-bg: #fce8e6;
+  --color-info: #1a56b0;
+  --color-info-bg: #e8f0fd;
+  --color-unknown: #5b4b8a;
+  --color-unknown-bg: #efe9fb;
+}
+
+:root[data-theme="dark"] {
+  --color-surface: #17181a;
+  --color-surface-raised: #202225;
+  --color-surface-sunken: #101113;
+  --color-ink: #f2f3f5;
+  --color-ink-muted: #a7acb8;
+  --color-ink-faint: #6b7280;
+  --color-safe: #34c778;
+  --color-safe-bg: #0f2b1c;
+  --color-warning: #f2b64a;
+  --color-warning-bg: #332405;
+  --color-critical: #ff6459;
+  --color-critical-bg: #3a1210;
+  --color-info: #6ea8fe;
+  --color-info-bg: #10203a;
+  --color-unknown: #b79cf0;
+  --color-unknown-bg: #241c3a;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  font-feature-settings:
+    "cv02",
+    "cv03",
+    "cv04",
+    "cv11";
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0.55;
+  }
+  100% {
+    box-shadow: 0 0 0 10px currentColor;
+    opacity: 0;
+  }
+}
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  animation: pulse-ring 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  color: inherit;
+  opacity: 0.4;
+}
