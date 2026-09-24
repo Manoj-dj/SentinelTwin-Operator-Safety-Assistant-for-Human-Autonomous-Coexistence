@@ -8,6 +8,7 @@ const TasksPage = lazy(() => import("@/pages/TasksPage"));
 const AnalyticsPage = lazy(() => import("@/pages/AnalyticsPage"));
 const IncidentsPage = lazy(() => import("@/pages/IncidentsPage"));
 const TrainingPage = lazy(() => import("@/pages/TrainingPage"));
+const TrainingResourcePage = lazy(() => import("@/pages/TrainingResourcePage"));
 const MachineHealthPage = lazy(() => import("@/pages/MachineHealthPage"));
 const ChatPage = lazy(() => import("@/pages/ChatPage"));
 const SettingsPage = lazy(() => import("@/pages/SettingsPage"));
@@ -23,6 +24,7 @@ export function AppRoutes() {
       <Route path={ROUTES.analytics} element={<AnalyticsPage />} />
       <Route path={ROUTES.incidents} element={<IncidentsPage />} />
       <Route path={ROUTES.training} element={<TrainingPage />} />
+      <Route path="/training/resource/:resourceId" element={<TrainingResourcePage />} />
       <Route path={ROUTES.machineHealth} element={<MachineHealthPage />} />
       <Route path={ROUTES.chat} element={<ChatPage />} />
       <Route path={ROUTES.settings} element={<SettingsPage />} />

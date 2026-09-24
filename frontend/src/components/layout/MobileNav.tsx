@@ -3,30 +3,20 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Drawer } from "@/components/ui/Drawer";
 import { LogoLockup } from "./Logo";
-import { ROUTES } from "@/lib/constants";
+import { ROUTES, NAV_ICONS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import {
-  Activity,
-  BarChart3,
-  Bot,
-  ClipboardList,
-  GraduationCap,
-  LayoutDashboard,
-  Settings,
-  ShieldAlert,
-  Wrench,
-} from "lucide-react";
+import { FeatureIconBadge } from "@/components/ui/FeatureIconBadge";
 
 const NAV_ITEMS = [
-  { to: ROUTES.dashboard, label: "Dashboard", icon: LayoutDashboard },
-  { to: ROUTES.liveSafety, label: "Live Safety", icon: ShieldAlert },
-  { to: ROUTES.tasks, label: "Tasks", icon: ClipboardList },
-  { to: ROUTES.analytics, label: "Analytics", icon: BarChart3 },
-  { to: ROUTES.incidents, label: "Incidents", icon: Activity },
-  { to: ROUTES.training, label: "Training", icon: GraduationCap },
-  { to: ROUTES.machineHealth, label: "Machine Health", icon: Wrench },
-  { to: ROUTES.chat, label: "Copilot", icon: Bot },
-  { to: ROUTES.settings, label: "Settings", icon: Settings },
+  { to: ROUTES.dashboard, label: "Dashboard", icon: NAV_ICONS.dashboard },
+  { to: ROUTES.liveSafety, label: "Live Safety", icon: NAV_ICONS.liveSafety },
+  { to: ROUTES.tasks, label: "Tasks", icon: NAV_ICONS.tasks },
+  { to: ROUTES.analytics, label: "Analytics", icon: NAV_ICONS.analytics },
+  { to: ROUTES.incidents, label: "Incidents", icon: NAV_ICONS.incidents },
+  { to: ROUTES.training, label: "Training", icon: NAV_ICONS.training },
+  { to: ROUTES.machineHealth, label: "Machine Health", icon: NAV_ICONS.machineHealth },
+  { to: ROUTES.chat, label: "Copilot", icon: NAV_ICONS.chat },
+  { to: ROUTES.settings, label: "Settings", icon: NAV_ICONS.settings },
 ];
 
 export function MobileNavButton() {
@@ -37,7 +27,7 @@ export function MobileNavButton() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Open navigation menu"
-        className="rounded-full p-2 text-ink-muted hover:bg-surface-sunken md:hidden"
+        className="cat-focus-ring rounded-full p-2 text-cat-gray-mid hover:bg-cat-gray-light md:hidden"
       >
         <Menu className="h-5 w-5" />
       </button>
@@ -45,7 +35,7 @@ export function MobileNavButton() {
         <div className="mb-4">
           <LogoLockup />
         </div>
-        <nav className="space-y-0.5">
+        <nav className="space-y-1">
           {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.to}
@@ -53,12 +43,14 @@ export function MobileNavButton() {
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium",
-                  isActive ? "bg-brand-charcoal text-white" : "text-ink-muted hover:bg-surface-sunken",
+                  "flex items-center gap-3 rounded-lg border-l-4 px-2.5 py-2 text-sm font-semibold",
+                  isActive
+                    ? "border-cat-yellow bg-cat-gray-light text-cat-black"
+                    : "border-transparent text-cat-gray-mid hover:bg-cat-gray-light",
                 )
               }
             >
-              <item.icon className="h-4.5 w-4.5" aria-hidden="true" />
+              <FeatureIconBadge icon={item.icon} size="sm" />
               {item.label}
             </NavLink>
           ))}

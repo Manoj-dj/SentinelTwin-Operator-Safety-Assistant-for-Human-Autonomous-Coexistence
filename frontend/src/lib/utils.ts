@@ -5,10 +5,23 @@ export function cn(...inputs: ClassValue[]): string {
   return clsx(inputs);
 }
 
-/** Safely parses a backend ISO timestamp; returns null instead of "Invalid Date". */
+const HAS_TIMEZONE = /(Z|[+-]\d{2}:?\d{2})$/;
+
+/**
+ * Safely parses a backend ISO timestamp; returns null instead of "Invalid Date".
+ *
+ * The backend always authors timestamps in UTC (see app/utils/time_utils.py::utcnow),
+ * but SQLite strips timezone info from datetimes on round-trip through SQLAlchemy, so
+ * the API can return offset-less strings like "2026-09-24T10:15:30.123456". Without a
+ * timezone marker, date-fns' parseISO (and native Date parsing) treats that string as
+ * LOCAL time, silently shifting every displayed timestamp by the viewer's UTC offset.
+ * Since every timestamp this app receives is UTC by backend convention, we append "Z"
+ * whenever one is missing before parsing.
+ */
 export function parseBackendDate(value: string | null | undefined): Date | null {
   if (!value) return null;
-  const parsed = typeof value === "string" ? parseISO(value) : value;
+  const normalized = typeof value === "string" && !HAS_TIMEZONE.test(value) ? `${value}Z` : value;
+  const parsed = typeof normalized === "string" ? parseISO(normalized) : normalized;
   return isValid(parsed) ? parsed : null;
 }
 

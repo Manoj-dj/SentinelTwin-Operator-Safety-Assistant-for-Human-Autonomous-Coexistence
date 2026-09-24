@@ -1,3 +1,19 @@
+import type React from "react";
+import {
+  Activity,
+  BarChart3,
+  Bot,
+  ClipboardList,
+  Gauge,
+  GraduationCap,
+  LayoutDashboard,
+  Radio,
+  Settings,
+  ShieldAlert,
+  ShieldCheck,
+  Thermometer,
+  Wrench,
+} from "lucide-react";
 import type { DemoScenarioName, RiskLevel, TruckState } from "@/api/types";
 
 export const ROUTES = {
@@ -10,6 +26,26 @@ export const ROUTES = {
   machineHealth: "/machine-health",
   chat: "/chat",
   settings: "/settings",
+} as const;
+
+/** One icon per concept, reused everywhere that concept appears (nav, section headers, card headers). */
+export const NAV_ICONS: Record<string, React.ElementType> = {
+  dashboard: LayoutDashboard,
+  liveSafety: ShieldAlert,
+  tasks: ClipboardList,
+  analytics: BarChart3,
+  incidents: Activity,
+  training: GraduationCap,
+  machineHealth: Wrench,
+  chat: Bot,
+  settings: Settings,
+};
+
+export const CONCEPT_ICONS = {
+  seatbelt: ShieldCheck,
+  proximity: Radio,
+  fatigue: Gauge,
+  machineHealth: Thermometer,
 } as const;
 
 /** Risk-level -> Tailwind token mapping. Color is always paired with text/icon, never used alone. */

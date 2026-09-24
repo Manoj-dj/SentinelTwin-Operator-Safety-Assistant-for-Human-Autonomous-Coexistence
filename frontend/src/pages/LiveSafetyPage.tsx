@@ -7,6 +7,7 @@ import { useIncidentList, useAcknowledgeIncident } from "@/hooks/useIncidents";
 import { DigitalTwinRadar, type RadarTruck } from "@/components/safety/DigitalTwinRadar";
 import { TruckStateCard } from "@/components/safety/TruckStateCard";
 import { StateTransitionPanel } from "@/components/safety/StateTransitionPanel";
+import { StateTransitionTimeline } from "@/components/safety/StateTransitionTimeline";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ErrorState } from "@/components/ui/ErrorState";
@@ -82,8 +83,10 @@ export default function LiveSafetyPage() {
     <div className="space-y-5">
       <Card className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-lg font-bold text-ink">Live Safety &amp; Digital Twin</h1>
-          <p className="text-sm text-ink-muted">
+          <h1 className="cat-heading-accent text-lg font-extrabold tracking-tight text-cat-black">
+            Live Safety &amp; Digital Twin
+          </h1>
+          <p className="mt-2 text-sm text-cat-gray-mid">
             State-visibility for autonomous trucks near your position. SentinelTwin never controls or authorizes
             truck movement.
           </p>
@@ -103,6 +106,11 @@ export default function LiveSafetyPage() {
               selectedTruckId={selectedTruckId}
               onSelectTruck={handleSelectTruck}
             />
+            {selectedTruckId && truckTwinQuery.data && (
+              <div className="mt-4">
+                <StateTransitionTimeline events={truckTwinQuery.data.recent_events} />
+              </div>
+            )}
           </Card>
 
           <div className="space-y-4">

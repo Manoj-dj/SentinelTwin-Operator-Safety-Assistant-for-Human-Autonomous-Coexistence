@@ -6,6 +6,7 @@ import { useBreaksToday, useCreateBreak, useOperatorFatigue } from "@/hooks/useF
 import { useMachineHealthRisk, useMaintenanceRecommendations } from "@/hooks/useMachineHealth";
 import { useOperatorDashboard } from "@/hooks/useDashboard";
 import { useLatestTelemetry } from "@/hooks/useTelemetry";
+import { useIncidentList } from "@/hooks/useIncidents";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Tabs } from "@/components/ui/Tabs";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -16,6 +17,9 @@ import { EfficiencyGauge } from "@/components/analytics/EfficiencyGauge";
 import { FatigueGauge } from "@/components/analytics/FatigueGauge";
 import { BaselineComparisonChart } from "@/components/analytics/BaselineComparisonChart";
 import { BreakAlertCard } from "@/components/analytics/BreakAlertCard";
+import { ShiftBreakdownChart } from "@/components/analytics/ShiftBreakdownChart";
+import { RiskFactorBreakdownChart } from "@/components/analytics/RiskFactorBreakdownChart";
+import { IncidentRiskTrendChart } from "@/components/analytics/IncidentRiskTrendChart";
 import { formatMinutes, formatPercent } from "@/lib/utils";
 
 type TabId = "efficiency" | "behavior" | "fatigue" | "health";
@@ -27,7 +31,7 @@ export default function AnalyticsPage() {
   return (
     <div className="space-y-4">
       <Card className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-lg font-bold text-ink">Analytics</h1>
+        <h1 className="cat-heading-accent text-lg font-extrabold tracking-tight text-cat-black">Analytics</h1>
         <Tabs
           tabs={[
             { id: "efficiency", label: "Efficiency", icon: <Gauge className="h-3.5 w-3.5" /> },
@@ -78,7 +82,16 @@ function EfficiencyTab({ operatorId, machineId }: { operatorId: string | null; m
                 <Stat label="Fuel eff." value={query.data.fuel_efficiency.toFixed(2)} />
                 <Stat label="Cycle eff." value={formatPercent(query.data.cycle_efficiency)} />
               </div>
-              <p className="rounded-lg bg-surface-sunken/60 p-2.5 text-xs text-ink">{query.data.insight}</p>
+              <div>
+                <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-cat-gray-mid">
+                  Current shift: productive vs. idle
+                </p>
+                <ShiftBreakdownChart
+                  productiveMinutes={query.data.productive_time_min}
+                  idlePercentage={query.data.idle_percentage}
+                />
+              </div>
+              <p className="rounded-lg bg-cat-gray-light p-2.5 text-xs text-ink">{query.data.insight}</p>
             </div>
           ) : null}
         </Card>
@@ -90,6 +103,8 @@ function EfficiencyTab({ operatorId, machineId }: { operatorId: string | null; m
 function BehaviorTab({ operatorId, machineId }: { operatorId: string | null; machineId: string | null }) {
   const behavior = useOperatorBehavior(operatorId);
   const telemetry = useLatestTelemetry(machineId);
+  const incidents = useIncidentList({ operator_id: operatorId ?? undefined, page_size: 100 });
+  const incidentItems = incidents.data?.items ?? [];
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -139,6 +154,16 @@ function BehaviorTab({ operatorId, machineId }: { operatorId: string | null; mac
             )}
           </div>
         )}
+      </Card>
+
+      <Card>
+        <CardHeader icon={<Activity className="h-4 w-4" />} title="Risk factor breakdown" subtitle="Which contributing factors show up most often in your incident history" />
+        <RiskFactorBreakdownChart incidents={incidentItems} />
+      </Card>
+
+      <Card>
+        <CardHeader icon={<Activity className="h-4 w-4" />} title="Incident risk trend" subtitle="Incident count and average risk score by day" />
+        <IncidentRiskTrendChart incidents={incidentItems} />
       </Card>
     </div>
   );

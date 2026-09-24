@@ -39,7 +39,7 @@ export default function TasksPage() {
     <div className="space-y-4">
       <Card className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-lg font-bold text-ink">Tasks &amp; Queue Schedule</h1>
+          <h1 className="cat-heading-accent text-lg font-extrabold tracking-tight text-cat-black">Tasks &amp; Queue Schedule</h1>
           <p className="text-sm text-ink-muted">Daily task board with autonomous truck queue context.</p>
         </div>
         <Tabs

@@ -33,7 +33,7 @@ export default function SettingsPage() {
       <Card className="flex items-center gap-2">
         <SettingsIcon className="h-5 w-5 text-brand-yellow-dark" />
         <div>
-          <h1 className="text-lg font-bold text-ink">Settings</h1>
+          <h1 className="cat-heading-accent text-lg font-extrabold tracking-tight text-cat-black">Settings</h1>
           <p className="text-sm text-ink-muted">Connection info and demo preferences. No secrets are stored here.</p>
         </div>
       </Card>

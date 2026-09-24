@@ -32,7 +32,7 @@ export default function IncidentsPage() {
         <div className="flex items-center gap-2">
           <Activity className="h-5 w-5 text-brand-yellow-dark" />
           <div>
-            <h1 className="text-lg font-bold text-ink">Incident Log</h1>
+            <h1 className="cat-heading-accent text-lg font-extrabold tracking-tight text-cat-black">Incident Log</h1>
             <p className="text-sm text-ink-muted">
               {truckIdParam ? "Filtered by truck from Live Safety" : `${query.data?.total ?? 0} recorded incidents`}
             </p>

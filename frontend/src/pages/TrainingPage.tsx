@@ -51,7 +51,7 @@ export default function TrainingPage() {
         <div className="flex items-center gap-2">
           <GraduationCap className="h-5 w-5 text-brand-yellow-dark" />
           <div>
-            <h1 className="text-lg font-bold text-ink">Operator Training Hub</h1>
+            <h1 className="cat-heading-accent text-lg font-extrabold tracking-tight text-cat-black">Operator Training Hub</h1>
             <p className="text-sm text-ink-muted">Manuals, SOPs, checklists, videos, and quizzes.</p>
           </div>
         </div>

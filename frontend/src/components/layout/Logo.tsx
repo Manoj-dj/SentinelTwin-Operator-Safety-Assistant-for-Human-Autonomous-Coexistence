@@ -1,51 +1,38 @@
+import catLogo from "@/assets/cat_logo.png";
+
 /**
- * Original SentinelTwin mark: an abstract shield silhouette with two
- * overlapping hexagonal "signal" nodes representing the human-operator /
- * autonomous-truck twin-state relationship. Not derived from, and does not
- * reference, any Caterpillar trademark or logo asset.
+ * Primary brand mark: the official Caterpillar logo asset, paired with the
+ * SentinelTwin wordmark. A white contrast chip sits behind the logo so it
+ * renders correctly against the black header bar as well as light surfaces.
  */
-export function LogoMark({ className = "h-8 w-8" }: { className?: string }) {
+export function CatLogoMark({ className = "h-8" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 48 48" fill="none" className={className} aria-hidden="true">
-      <path
-        d="M24 3 L42 10 V22 C42 33 34.5 41.5 24 45 C13.5 41.5 6 33 6 22 V10 Z"
-        fill="var(--color-charcoal)"
-      />
-      <path
-        d="M24 3 L42 10 V22 C42 33 34.5 41.5 24 45 C13.5 41.5 6 33 6 22 V10 Z"
-        stroke="var(--color-brand-yellow)"
-        strokeWidth="1.5"
-      />
-      <g transform="translate(24 23)">
-        <polygon
-          points="-9,-6 0,-11 9,-6 9,5 0,10 -9,5"
-          fill="none"
-          stroke="var(--color-brand-yellow)"
-          strokeWidth="2"
-          transform="translate(-6 0)"
-        />
-        <polygon
-          points="-9,-6 0,-11 9,-6 9,5 0,10 -9,5"
-          fill="var(--color-brand-yellow)"
-          fillOpacity="0.9"
-          transform="translate(6 0)"
-        />
-      </g>
-    </svg>
+    <span className="inline-flex items-center justify-center rounded-md bg-white px-2 py-1 shadow-cat-badge">
+      <img src={catLogo} alt="Caterpillar" className={`${className} w-auto object-contain`} />
+    </span>
   );
 }
 
-export function LogoLockup({ collapsed = false }: { collapsed?: boolean }) {
+export function LogoLockup({ collapsed = false, onDark = false }: { collapsed?: boolean; onDark?: boolean }) {
   return (
-    <div className="flex items-center gap-2.5">
-      <LogoMark className="h-8 w-8 shrink-0" />
+    <div className="flex items-center gap-3">
+      <CatLogoMark className="h-7" />
       {!collapsed && (
-        <div className="leading-tight">
-          <p className="text-sm font-extrabold tracking-tight text-ink">SentinelTwin</p>
-          <p className="text-[10px] font-medium uppercase tracking-wide text-ink-muted">
-            Operator Safety Intelligence
-          </p>
-        </div>
+        <>
+          <span className={onDark ? "h-8 w-px bg-white/20" : "h-8 w-px bg-cat-gray-border"} aria-hidden="true" />
+          <div className="leading-tight">
+            <p className={`text-sm font-extrabold tracking-tight ${onDark ? "text-white" : "text-ink"}`}>
+              SentinelTwin
+            </p>
+            <p
+              className={`text-[10px] font-medium uppercase tracking-wide ${
+                onDark ? "text-white/60" : "text-ink-muted"
+              }`}
+            >
+              Operator Safety Intelligence
+            </p>
+          </div>
+        </>
       )}
     </div>
   );

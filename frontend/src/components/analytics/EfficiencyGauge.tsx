@@ -1,21 +1,13 @@
-import { RadialGauge } from "./RadialGauge";
+import { RadialGaugeCard, rangeForPercentage } from "./RadialGaugeCard";
 
 export function EfficiencyGauge({ percentage, grade }: { percentage: number; grade: string }) {
-  const color =
-    percentage >= 85
-      ? "var(--color-safe)"
-      : percentage >= 70
-        ? "var(--color-info)"
-        : percentage >= 50
-          ? "var(--color-warning)"
-          : "var(--color-critical)";
-
   return (
-    <RadialGauge
+    <RadialGaugeCard
       value={percentage}
+      max={100}
       label={`Efficiency (Grade ${grade})`}
       valueLabel={`${percentage.toFixed(0)}%`}
-      colorVar={color}
+      range={rangeForPercentage(percentage)}
     />
   );
 }

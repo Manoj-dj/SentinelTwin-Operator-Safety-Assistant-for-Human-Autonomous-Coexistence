@@ -22,7 +22,7 @@ export default function MachineHealthPage() {
         <div className="flex items-center gap-2">
           <Wrench className="h-5 w-5 text-brand-yellow-dark" />
           <div>
-            <h1 className="text-lg font-bold text-ink">Machine Health</h1>
+            <h1 className="cat-heading-accent text-lg font-extrabold tracking-tight text-cat-black">Machine Health</h1>
             <p className="text-sm text-ink-muted">Predicted maintenance risk and inspection guidance.</p>
           </div>
         </div>

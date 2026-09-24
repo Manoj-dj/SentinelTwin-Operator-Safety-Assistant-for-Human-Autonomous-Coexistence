@@ -5,7 +5,7 @@ type Variant = "primary" | "secondary" | "ghost" | "danger";
 type Size = "sm" | "md";
 
 const VARIANT_CLASSES: Record<Variant, string> = {
-  primary: "bg-brand-yellow text-brand-charcoal hover:bg-brand-yellow-dark font-bold",
+  primary: "bg-brand-yellow text-brand-charcoal hover:bg-brand-yellow-dark font-bold shadow-cat-card",
   secondary: "bg-surface-sunken text-ink hover:bg-black/10 font-semibold",
   ghost: "bg-transparent text-ink-muted hover:bg-surface-sunken font-medium",
   danger: "bg-status-critical text-white hover:opacity-90 font-semibold",
@@ -24,7 +24,7 @@ export const Button = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center gap-1.5 rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-yellow disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex items-center justify-center gap-1.5 rounded-full transition-all duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-yellow disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.97]",
         VARIANT_CLASSES[variant],
         SIZE_CLASSES[size],
         className,

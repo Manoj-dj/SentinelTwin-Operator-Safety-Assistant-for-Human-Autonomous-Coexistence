@@ -28,7 +28,7 @@ export default function ChatPage() {
     <div className="grid h-[calc(100vh-8rem)] grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_300px]">
       <Card className="flex min-h-0 flex-col">
         <div className="mb-2 flex items-center justify-between">
-          <h1 className="text-lg font-bold text-ink">Operator Copilot</h1>
+          <h1 className="cat-heading-accent text-lg font-extrabold tracking-tight text-cat-black">Operator Copilot</h1>
           <SafetyDisclaimer compact className="max-w-xs" />
         </div>
         <div ref={scrollRef} className="scrollbar-thin flex-1 space-y-4 overflow-y-auto py-2">

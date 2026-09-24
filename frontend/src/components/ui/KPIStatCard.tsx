@@ -24,12 +24,23 @@ export function KPIStatCard({
     info: "text-status-info",
     neutral: "text-ink",
   };
+  const iconBgClasses: Record<string, string> = {
+    safe: "bg-status-safe-bg text-status-safe",
+    warning: "bg-status-warning-bg text-status-warning",
+    critical: "bg-status-critical-bg text-status-critical",
+    info: "bg-status-info-bg text-status-info",
+    neutral: "bg-cat-gray-light text-cat-gray-mid",
+  };
 
   return (
-    <Card className="flex flex-col gap-2">
+    <Card interactive className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-medium uppercase tracking-wide text-ink-muted">{label}</span>
-        {icon && <div className="text-ink-faint">{icon}</div>}
+        <span className="text-xs font-semibold uppercase tracking-wide text-cat-gray-mid">{label}</span>
+        {icon && (
+          <div className={cn("flex h-7 w-7 items-center justify-center rounded-full", iconBgClasses[tone])}>
+            {icon}
+          </div>
+        )}
       </div>
       <div className="flex items-baseline gap-1">
         <span className={cn("text-2xl font-bold tabular-nums", toneClasses[tone])}>{value}</span>

@@ -3,27 +3,38 @@
 @tailwind utilities;
 
 :root {
-  /* Brand */
-  --color-brand-yellow: #ffc20e;
-  --color-brand-yellow-dark: #e6ac00;
-  --color-charcoal: #202020;
+  /* Brand (Caterpillar-inspired: black + yellow identity) */
+  --color-brand-yellow: #ffcd11;
+  --color-brand-yellow-dark: #e5b800;
+  --color-charcoal: #1a1a1a;
   --color-charcoal-light: #2d2d2d;
 
+  /* Caterpillar brand system tokens */
+  --cat-black: #1a1a1a;
+  --cat-yellow: #ffcd11;
+  --cat-yellow-dark: #e5b800;
+  --cat-white: #ffffff;
+  --cat-gray-light: #f5f5f5;
+  --cat-gray-mid: #6b6b6b;
+  --cat-gray-border: #e0e0e0;
+
   /* Surfaces */
-  --color-surface: #f4f5f7;
+  --color-surface: #f5f5f5;
   --color-surface-raised: #ffffff;
-  --color-surface-sunken: #e9eaed;
+  --color-surface-sunken: #eceeef;
 
   /* Text */
   --color-ink: #1a1c20;
   --color-ink-muted: #5b616e;
   --color-ink-faint: #8a8f99;
 
-  /* Status */
+  /* Status colors -- deliberately distinct from brand yellow (a warm ORANGE,
+     not yellow) so "warning" is never visually confused with the Caterpillar
+     brand accent used for CTAs/highlights. */
   --color-safe: #157f3c;
   --color-safe-bg: #e5f6ec;
-  --color-warning: #a15c00;
-  --color-warning-bg: #fff2d9;
+  --color-warning: #c65a00;
+  --color-warning-bg: #fdeee1;
   --color-critical: #b3261e;
   --color-critical-bg: #fce8e6;
   --color-info: #1a56b0;
@@ -41,8 +52,8 @@
   --color-ink-faint: #6b7280;
   --color-safe: #34c778;
   --color-safe-bg: #0f2b1c;
-  --color-warning: #f2b64a;
-  --color-warning-bg: #332405;
+  --color-warning: #ff9736;
+  --color-warning-bg: #33200a;
   --color-critical: #ff6459;
   --color-critical-bg: #3a1210;
   --color-info: #6ea8fe;
@@ -95,3 +106,47 @@ body {
   color: inherit;
   opacity: 0.4;
 }
+
+/* SVG-safe pulse: ::after pseudo-elements don't render on SVG shape elements
+   (circle/rect/path) in most browsers, so the .pulse-ring approach above
+   silently does nothing when applied directly to an SVG <circle>. This
+   animates the circle itself via a CSS transform instead. */
+@keyframes svg-risk-pulse {
+  0% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+.truck-risk-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: svg-risk-pulse 1.6s ease-out infinite;
+}
+
+/* Brand-yellow focus ring used consistently on interactive elements. */
+.cat-focus-ring:focus-visible {
+  outline: 2px solid var(--cat-yellow);
+  outline-offset: 2px;
+}
+
+/* Section heading underline accent, matching the Caterpillar reference style. */
+.cat-heading-accent {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+.cat-heading-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 2.5rem;
+  border-radius: 999px;
+  background-color: var(--cat-yellow);
+}
+
